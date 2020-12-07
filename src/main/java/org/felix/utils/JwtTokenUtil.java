@@ -1,17 +1,12 @@
 package org.felix.utils;
 
-<<<<<<< HEAD
 import io.jsonwebtoken.SignatureAlgorithm;
-=======
->>>>>>> origin/master
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
-<<<<<<< HEAD
 import java.util.Map;
-=======
->>>>>>> origin/master
+
 
 /**
  * @author Felix
@@ -38,7 +33,6 @@ public final class JwtTokenUtil {
         issuer = tokenSettings.getIssuer();
     }
 
-<<<<<<< HEAD
     public static String getAccessToken(String subject, Map<String, Object> claims) {
         return generateToken(issuer, subject, claims, accessTokenExpireTime.toMillis(), secretKey);
     }
@@ -69,8 +63,6 @@ public final class JwtTokenUtil {
         long nowMillis = System.currentTimeMillis();
 
     }
-=======
->>>>>>> origin/master
 
 
 }
