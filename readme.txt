@@ -13,3 +13,6 @@
     @After: final增强，不管是抛出异常或者正常退出都会执行
 五、TokenSettings
     @ConfigurationProperties
+六、TOKEN认证基于JSON Web Token(JWT)，参见JwtTokenUtil类
+    https://www.cnblogs.com/cndarren/p/11518443.html
+
