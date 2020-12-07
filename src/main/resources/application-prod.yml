@@ -1,0 +1,25 @@
+system:
+  send_notice: 1 #是否发送相关通知给管理员（0：不发送；1：发送）
+  getIPAddress: 1 #是否调用百度API接口获取IP归属地（0：不调用；1：调用）
+  restore_db: 0 #是否定时恢复数据库（0：不恢复；1：恢复）
+  backup_db: 1 #是否定时备份数据库（0：不备份；1：备份）
+  isShowMybatisLog: false #是否显示MyBatis的日志(true：显示；false：不显示)
+  ipBlackHours: 72 #恶意刷新和暴力请求的IP被加入黑名单小时数
+  #数据库恢复执行的SQL脚本路径
+  sql_path: C://Easy9//easy9copy.sql
+  #数据库恢复命令
+  mysql_db_restore: cmd /c mysql -h localhost -uroot -proot easy9
+  #数据库备份目录
+  mysql_db_backup_file: C://Easy9//backup
+  #数据库备份命令(服务器必须配置环境变量才行：path:C:/Program Files/MySQL/MySQL Server 5.5/bin)
+  mysql_db_backup: cmd /c mysqldump -h localhost -uroot -proot easy9
+
+#================License相关配置-开始===============#
+license:
+  checkLicenseFlag: 0 #是否验证授权(0：不验证；1：验证)
+  subject: custom_license #主题
+  publicAlias: publicCert #公钥别称
+  storePass: colin19910513 #访问公钥的密码
+  licensePath: D:/licenseTest/license.lic #license位置
+  publicKeysStorePath: D:/licenseTest/publicCerts.keystore #公钥位置
+#================License相关配置-结束===============#
