@@ -12,10 +12,15 @@ import java.time.Duration;
 @Configuration
 @ConfigurationProperties(prefix = "jwt")
 public class TokenSettings {
+
     private String secretKey;
+
     private Duration accessTokenExpireTime;
+
     private Duration refreshTokenExpireTime;
+
     private Duration refreshTokenExpireAppTime;
+
     private String  issuer;
 
     public String getSecretKey() {

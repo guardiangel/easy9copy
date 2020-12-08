@@ -1,21 +1,64 @@
 package org.felix.service;
 
+import org.felix.mapper.SysDeptMapper;
+import org.felix.mapper.SysUserMapper;
 import org.felix.model.entity.DeptUserTree;
 import org.felix.model.entity.SysUser;
 import org.felix.model.entity.UserTree;
 import org.felix.model.vo.req.*;
 import org.felix.model.vo.resp.*;
+import org.felix.utils.IPAddressTool;
+import org.felix.utils.ThirdTool;
+import org.felix.utils.TokenSettings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * @author Felix
+ */
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
     private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @Resource
+    private TokenSettings tokenSettings;
+
+    @Resource
+    private IPAddressTool ipAddressTool;
+
+    @Resource
+    private ThirdTool thirdTool;
+
+    @Resource
+    private SysUserMapper sysUserMapper;
+
+    @Resource
+    private SysDeptMapper sysDeptMapper;
+
+    @Resource
+    private SysLoginLogMapper sysLoginLogMapper;
+
+    @Resource
+    private PermissionService permissionService;
+
+    @Resource
+    private RoleService roleService;
+
+    @Resource
+    private RedisService redisService;
+
+    @Resource
+    private UserRoleService userRoleService;
+
+    @Resource
+    private MailService mailService;
+
 
     @Override
     public List<TableStructureVO> selectTabelByName(String tableName) {

@@ -1,5 +1,8 @@
 package org.felix.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author Felix
  */
@@ -22,6 +25,17 @@ public final class Tool {
             }
         }
         return true;
+    }
+
+    /**
+     * 获得当前时间字符串
+     *
+     * @return
+     */
+    public static String getCurrentTimeString() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return dateFormat.format(date);
     }
 
     public static void main(String[] args) {

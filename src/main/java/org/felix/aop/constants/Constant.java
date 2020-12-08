@@ -6,6 +6,11 @@ package org.felix.aop.constants;
 public final class Constant {
 
     /**
+     * 系统编码格式
+     */
+    public static final String SYSTEM_CHARACTER_ENCODING = "UTF-8";
+
+    /**
      * 未定义的值
      */
     public static final String UNDEFINED = "undefined";
