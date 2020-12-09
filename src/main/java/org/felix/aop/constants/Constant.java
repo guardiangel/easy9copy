@@ -6,6 +6,11 @@ package org.felix.aop.constants;
 public final class Constant {
 
     /**
+     * permission的父ID
+     */
+    public static final String PERMISSION_PID = "0";
+
+    /**
      * 系统编码格式
      */
     public static final String SYSTEM_CHARACTER_ENCODING = "UTF-8";

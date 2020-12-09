@@ -1,0 +1,962 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.felix.mapper.SysUserMapper">
+
+    <resultMap id="BaseResultMap" type="org.felix.model.entity.SysUser">
+        <id column="id" jdbcType="VARCHAR" property="id"></id>
+        <result column="username" jdbcType="VARCHAR" property="username"></result>
+        <result column="salt" jdbcType="VARCHAR" property="salt"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="dept_id" jdbcType="VARCHAR" property="deptId"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="sex" jdbcType="TINYINT" property="sex"/>
+        <result column="deleted" jdbcType="TINYINT" property="deleted"/>
+        <result column="create_id" jdbcType="VARCHAR" property="createId"/>
+        <result column="update_id" jdbcType="VARCHAR" property="updateId"/>
+        <result column="create_where" jdbcType="TINYINT" property="createWhere"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="point" jdbcType="INTEGER" property="point"/>
+        <result column="position" jdbcType="VARCHAR" property="position"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, username, salt, password, phone, dept_id, real_name, nick_name, email, status,
+        sex, deleted, create_id, update_id, create_where, create_time, update_time, point, position
+    </sql>
+
+    <select id="selectTabelByName" resultType="org.felix.model.vo.resp.TableStructureVO"
+            parameterType="java.lang.String">
+        <![CDATA[
+            SELECT
+                t1.TABLE_NAME,
+                t1.COLUMN_NAME,
+                t1.IS_NULLABLE,
+                t1.COLUMN_TYPE,
+                t1.CHARACTER_MAXIMUM_LENGTH,
+                t1.COLUMN_COMMENT
+            FROM
+                information_schema.COLUMNS t1
+            WHERE
+                TABLE_SCHEMA = (SELECT DATABASE())
+                    AND t1.TABLE_NAME= #{tableName}
+        ]]>
+    </select>
+
+    <select id="selectAllTable" resultType="org.felix.model.vo.resp.TableVO"
+            parameterType="java.lang.String">
+        <![CDATA[
+            SELECT
+                t1.TABLE_NAME,
+                t1.COLUMN_NAME,
+                t1.IS_NULLABLE,
+                t1.COLUMN_TYPE,
+                t1.CHARACTER_MAXIMUM_LENGTH,
+                t1.COLUMN_COMMENT
+            FROM
+                information_schema.COLUMNS t1
+            WHERE
+                TABLE_SCHEMA = (SELECT DATABASE())
+            ORDER BY t1.CREATE_TIME DESC
+        ]]>
+    </select>
+
+    <select id="getUserInfoByName" resultType="org.felix.model.entity.SysUser"
+            parameterType="java.lang.String">
+        <![CDATA[
+             SELECT
+                    t1.id,
+                    t1.username,
+                    t1.salt,
+                    t1.password,
+                    t1.phone,
+                    t1.dept_id,
+                    t1.real_name,
+                    t1.nick_name,
+                    t1.email,
+                    t1.status,
+                    t1.sex,
+                    t1.deleted,
+                    t1.create_id,
+                    t1.update_id,
+                    t1.create_where,
+                    t1.create_time,
+                    t1.update_time,
+                    t1.point,
+                    t2.name AS deptName,
+                    t3.wages_number,
+                    t3.social_number,
+                    t3.provident_fund_number,
+                    t3.nation,
+                    t3.country,
+                    t3.home_address,
+                    t3.live_address,
+                    t3.id_number,
+                    t3.graduation_school,
+                    t3.education,
+                    t3.identity,
+                    t3.height,
+                    t3.weight,
+                    t3.blood_type,
+                    t3.major,
+                    t3.qq,
+                    t3.webchat,
+                    t3.marriage,
+                    t3.msn,
+                    t3.military_service,
+                    t4.photo,
+                  t5.real_name as createUserName,
+                  t6.real_name as updateUserName,
+                  t1.position
+                FROM
+                    sys_user t1
+                LEFT JOIN sys_dept t2 ON t1.dept_id = t2.id
+                LEFT JOIN sys_user_attac t3 ON t1.id = t3.user_id
+                LEFT JOIN sys_user_photo t4 ON t1.id = t4.user_id
+                LEFT JOIN sys_user t5 on t1.create_id = t5.id
+                LEFT JOIN sys_user t6 on t1.update_id = t6.id
+                WHERE t1.username = #{userName} AND t1.deleted = 1
+        ]]>
+    </select>
+
+    <select id="selectByPrimaryKey" resultType="org.felix.model.entity.SysUser"
+            parameterType="java.lang.String">
+        <![CDATA[
+            SELECT
+            t1.id,
+            t1.username,
+            t1.salt,
+            t1.password,
+            t1.phone,
+            t1.dept_id,
+            t1.real_name,
+            t1.nick_name,
+            t1.email,
+            t1.status,
+            t1.sex,
+            t1.deleted,
+            t1.create_id,
+            t1.update_id,
+            t1.create_where,
+            t1.create_time,
+            t1.update_time,
+            t1.point,
+            t1.month_salary,
+            t2.name AS deptName,
+            t3.wages_number,
+            t3.social_number,
+            t3.provident_fund_number,
+            (select dic.dic_value from sys_dic_info dic where dic.dic_code = t3.nation and dic.type_code = '100003') as nation,
+            (select dic.dic_value from sys_dic_info dic where dic.dic_code = t3.country and dic.type_code = '100002') as country,
+            t3.home_address,
+            t3.live_address,
+            t3.id_number,
+            t3.graduation_school,
+            (select dic.dic_value from sys_dic_info dic where dic.dic_code = t3.education and dic.type_code = '100005') as education,
+            (select dic.dic_value from sys_dic_info dic where dic.dic_code = t3.identity and dic.type_code = '100006') as identity,
+            t3.height,
+            t3.weight,
+            (select dic.dic_value from sys_dic_info dic where dic.dic_code = t3.blood_type and dic.type_code = '100007') as blood_type,
+            (select dic.dic_value from sys_dic_info dic where dic.dic_code = t3.major and dic.type_code = '100008') as major,
+            t3.qq,
+            t3.webchat,
+            (select dic.dic_value from sys_dic_info dic where dic.dic_code = t3.marriage and dic.type_code = '100009') as marriage,
+            t3.msn,
+            t3.military_service,
+            t4.photo,
+          t5.real_name as createUserName,
+          t6.real_name as updateUserName,
+          (select dic.dic_value from sys_dic_info dic where dic.dic_code = t1.position and dic.type_code = 'ZW20200813') as position
+        FROM
+            sys_user t1
+        LEFT JOIN sys_dept t2 ON t1.dept_id = t2.id
+        LEFT JOIN sys_user_attac t3 ON t1.id = t3.user_id
+        LEFT JOIN sys_user_photo t4 ON t1.id = t4.user_id
+        LEFT JOIN sys_user t5 on t1.create_id = t5.id
+        LEFT JOIN sys_user t6 on t1.update_id = t6.id
+        WHERE
+            t1.id = #{id,jdbcType=VARCHAR}
+        ]]>
+    </select>
+
+    <select id="getBbsUserInfoByPkId" resultType="org.felix.model.vo.resp.BbsUserVO"
+            parameterType="java.lang.String">
+        <![CDATA[
+            SELECT
+                t1.id,
+                t1.username,
+                t1.phone,
+                t1.dept_id,
+                t1.real_name,
+                t1.nick_name,
+                t1.email,
+                t1.status,
+                t1.sex,
+                t1.deleted,
+                t1.create_id,
+                t1.update_id,
+                t1.create_where,
+                t1.create_time,
+                t1.update_time,
+                t1.position,
+                t3.photo,
+                t1.point,
+                t2.name AS deptName
+            FROM
+                sys_user t1
+                    LEFT JOIN
+                sys_dept t2 ON t1.dept_id = t2.id
+                    LEFT JOIN
+                sys_user_photo t3 ON t1.id = t3.user_id
+            where t1.id = #{id,jdbcType=VARCHAR}
+
+        ]]>
+    </select>
+
+    <select id="selectPublishPostCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        <![CDATA[
+            select
+                count(*)
+            from bbs_post t
+            where t.publish_user_id = #{userId}
+                and t.state = '2'
+        ]]>
+    </select>
+
+    <select id="selectCommentCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        <![CDATA[
+        select
+            count(*)
+        from bbs_post_reply t
+        where t.publish_user_id = #{userId}
+            and t.state = '2'
+         ]]>
+    </select>
+
+    <update id="updateUserPoint" parameterType="java.lang.String">
+        <![CDATA[
+             update sys_user t1
+                set t1.point = t1.point + #{point}
+            where id = #{userId}
+         ]]>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="org.felix.model.entity.SysUser">
+             update sys_user
+            <set>
+                <if test="username != null">
+                    username = #{username,jdbcType=VARCHAR},
+                </if>
+                <if test="salt != null">
+                    salt = #{salt,jdbcType=VARCHAR},
+                </if>
+                <if test="phone != null">
+                    phone = #{phone,jdbcType=VARCHAR},
+                </if>
+                <if test="deptId != null">
+                    dept_id = #{deptId,jdbcType=VARCHAR},
+                </if>
+                <if test="realName != null">
+                    real_name = #{realName,jdbcType=VARCHAR},
+                </if>
+                <if test="nickName != null">
+                    nick_name = #{nickName,jdbcType=VARCHAR},
+                </if>
+                <if test="email != null">
+                    email = #{email,jdbcType=VARCHAR},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=TINYINT},
+                </if>
+                <if test="sex != null">
+                    sex = #{sex,jdbcType=TINYINT},
+                </if>
+                <if test="deleted != null">
+                    deleted = #{deleted,jdbcType=TINYINT},
+                </if>
+                <if test="createId != null">
+                    create_id = #{createId,jdbcType=VARCHAR},
+                </if>
+                <if test="updateId != null">
+                    update_id = #{updateId,jdbcType=VARCHAR},
+                </if>
+                <if test="createWhere != null">
+                    create_where = #{createWhere,jdbcType=TINYINT},
+                </if>
+                <if test="createTime != null">
+                    create_time = #{createTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updateTime != null">
+                    update_time = #{updateTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="monthSalary != null">
+                    month_salary = #{monthSalary},
+                </if>
+                <if test="position != null">
+                    position = #{position},
+                </if>
+            </set>
+            where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateBySysUserAttacPrimaryKeySelective" parameterType="org.felix.model.ro.SysUserAttac">
+        update sys_user_attac
+        <set>
+            <if test="userId != null">
+                wages_number = #{wagesNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="socialNumber != null">
+                social_number = #{socialNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="providentFundNumber != null">
+                provident_fund_number = #{providentFundNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="nation != null">
+                nation = #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                country = #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="homeAddress != null">
+                home_address = #{homeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="liveAddress != null">
+                live_address = #{liveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="idNumber != null">
+                id_number = #{idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="graduationSchool != null">
+                graduation_school = #{graduationSchool,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                education = #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="identity != null">
+                identity = #{identity,jdbcType=VARCHAR},
+            </if>
+            <if test="height != null">
+                height = #{height,jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null">
+                weight = #{weight,jdbcType=VARCHAR},
+            </if>
+            <if test="bloodType != null">
+                blood_type = #{bloodType,jdbcType=VARCHAR},
+            </if>
+            <if test="major != null">
+                major = #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                qq = #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="webchat != null">
+                webchat = #{webchat,jdbcType=VARCHAR},
+            </if>
+            <if test="marriage != null">
+                marriage = #{marriage,jdbcType=VARCHAR},
+            </if>
+            <if test="msn != null">
+                msn = #{msn,jdbcType=VARCHAR},
+            </if>
+            <if test="militaryService != null">
+                military_service = #{militaryService,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <select id="selectTabelByName" resultType="org.felix.model.entity.SysUser"
+            parameterType="org.felix.model.vo.req.UserPageReqVO">
+        SELECT
+            t1.id,
+            t1.username,
+            t1.salt,
+            t1.password,
+            t1.phone,
+            t1.dept_id,
+            t1.real_name,
+            t1.nick_name,
+            t1.email,
+            t1.status,
+            t1.sex,
+            t1.deleted,
+            t1.create_id,
+            t1.update_id,
+            t1.create_where,
+            t1.create_time,
+            t1.update_time,
+            t1.point,
+            t1.month_salary,
+            t2.name AS deptName,
+            t3.wages_number,
+            t3.social_number,
+            t3.provident_fund_number,
+            t3.nation,
+            t3.country,
+            t3.home_address,
+            t3.live_address,
+            t3.id_number,
+            t3.graduation_school,
+            t3.education,
+            t3.identity,
+            t3.height,
+            t3.weight,
+            t3.blood_type,
+            t3.major,
+            t3.qq,
+            t3.webchat,
+            t3.marriage,
+            t3.msn,
+            t3.military_service,
+            t4.photo,
+            t5.real_name as createUserName,
+            t6.real_name as updateUserName,
+            t7.dic_value as positionStr,
+            t1.position
+        FROM
+            sys_user t1
+        LEFT JOIN sys_dept t2 ON t1.dept_id = t2.id
+        LEFT JOIN sys_user_attac t3 ON t1.id = t3.user_id
+        LEFT JOIN sys_user_photo t4 ON t1.id = t4.user_id
+        LEFT JOIN sys_user t5 on t1.create_id = t5.id
+        LEFT JOIN sys_user t6 on t1.update_id = t6.id
+        LEFT JOIN sys_dic_info t7 on t1.position = t7.dic_code and t7.type_code = 'ZW20200813'
+        WHERE t1.deleted = 1
+        <if test="username!=null and username!=''">
+            AND t1.username LIKE concat('%',#{username},'%')
+        </if>
+        <if test="nickName!=null and nickName!=''">
+            AND t1.nick_name LIKE concat('%',#{nickName},'%')
+        </if>
+        <if test="startTime!=null and startTime!=''">
+            AND t1.create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime!=null and endTime!=''">
+            AND t1.create_time &lt;= #{endTime}
+        </if>
+        <if test="userId!=null and userId!='' ">
+            AND t1.id LIKE concat('%',#{userId},'%')
+        </if>
+        <if test="status!=null and status!='' or status==0 ">
+            AND t1.status = #{status}
+        </if>
+        <if test="email != null and email != '' ">
+            AND t1.email LIKE concat('%',#{email},'%')
+        </if>
+        order by t1.update_time desc
+    </select>
+
+    <select id="selectAllByParam" resultType="org.felix.model.entity.SysUser"
+            parameterType="org.felix.model.vo.req.UserPageReqVO">
+        SELECT
+            t1.id,
+            t1.username,
+            t1.salt,
+            t1.password,
+            t1.phone,
+            t1.dept_id,
+            t1.real_name,
+            t1.nick_name,
+            t1.email,
+            t1.status,
+            t1.sex,
+            t1.deleted,
+            t1.create_id,
+            t1.update_id,
+            t1.create_where,
+            t1.create_time,
+            t1.update_time,
+            t1.point,
+            t1.position,
+            t2.real_name AS createUserName,
+            t3.real_name AS updateUserName
+        FROM
+            sys_user t1
+                LEFT JOIN
+            sys_user t2 ON t1.create_id = t2.id
+                LEFT JOIN
+            sys_user t3 ON t1.update_id = t3.id
+        WHERE
+            t1.deleted = 1
+        <if test="username!=null and username!=''">
+            AND t1.username = #{username}
+        </if>
+        <if test="email != null and email != '' ">
+            AND t1.email = #{email}
+        </if>
+        <if test="realName != null and realName != '' ">
+            AND t1.real_name = #{realName}
+        </if>
+        order by t1.update_time desc
+    </select>
+
+    <select id="selectAllUser" resultType="org.felix.model.entity.SysUser">
+        <![CDATA[
+         SELECT 
+            t1.id,
+            t1.username,
+            t1.salt,
+            t1.password,
+            t1.phone,
+            t1.dept_id,
+            t1.real_name,
+            t1.nick_name,
+            t1.email,
+            t1.status,
+            t1.sex,
+            t1.deleted,
+            t1.create_id,
+            t1.update_id,
+            t1.create_where,
+            t1.create_time,
+            t1.update_time,
+            t1.point,
+            t1.month_salary,
+            t2.real_name AS createUserName,
+            t3.real_name AS updateUserName,
+            t1.position
+        FROM
+            sys_user t1
+                LEFT JOIN
+            sys_user t2 ON t1.create_id = t2.id
+                LEFT JOIN
+            sys_user t3 ON t1.update_id = t3.id
+        WHERE
+            t1.deleted = 1
+        ORDER BY t1.update_time DESC
+        ]]>
+    </select>
+
+    <update id="deletedUsers" parameterType="org.felix.model.entity.SysUser">
+        update sys_user
+        <set>
+            deleted = 0,
+            <if test="sysUser.updateId != null">
+                update_id = #{sysUser.updateId,jdbcType=VARCHAR},
+            </if>
+            <if test="sysUser.updateTime != null">
+                update_time = #{sysUser.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id in
+        <foreach collection="list" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </update>
+
+    <insert id="insertUser" parameterType="org.felix.model.entity.SysUser">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="salt != null">
+                salt,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="deptId != null">
+                dept_id,
+            </if>
+            <if test="realName != null">
+                real_name,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="deleted != null">
+                deleted,
+            </if>
+            <if test="createId != null">
+                create_id,
+            </if>
+            <if test="updateId != null">
+                update_id,
+            </if>
+            <if test="createWhere != null">
+                create_where,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="point != null">
+                point,
+            </if>
+            <if test="monthSalary != null">
+                month_salary,
+            </if>
+            <if test="position != null">
+                position,
+            </if>
+        </trim>
+
+        <trim prefix=" values(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="username != null">
+                #{username,jdbcType=VARCHAR},
+            </if>
+            <if test="salt != null">
+                #{salt,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="phone != null">
+                #{phone,jdbcType=VARCHAR},
+            </if>
+            <if test="deptId != null">
+                #{deptId,jdbcType=VARCHAR},
+            </if>
+            <if test="realName != null">
+                #{realName,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=TINYINT},
+            </if>
+            <if test="deleted != null">
+                #{deleted,jdbcType=TINYINT},
+            </if>
+            <if test="createId != null">
+                #{createId,jdbcType=VARCHAR},
+            </if>
+            <if test="updateId != null">
+                #{updateId,jdbcType=VARCHAR},
+            </if>
+            <if test="createWhere != null">
+                #{createWhere,jdbcType=TINYINT},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="point != null">
+                #{point,jdbcType=INTEGER},
+            </if>
+            <if test="monthSalary != null">
+                #{monthSalary},
+            </if>
+            <if test="position != null">
+                #{position},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertUserAttac" parameterType="org.felix.model.ro.SysUserAttac">
+        insert into sys_user_attac
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="wagesNumber != null">
+                wages_number,
+            </if>
+            <if test="socialNumber != null">
+                social_number,
+            </if>
+            <if test="providentFundNumber != null">
+                provident_fund_number,
+            </if>
+            <if test="nation != null">
+                nation,
+            </if>
+            <if test="country != null">
+                country,
+            </if>
+            <if test="homeAddress != null">
+                home_address,
+            </if>
+            <if test="liveAddress != null">
+                live_address,
+            </if>
+            <if test="idNumber != null">
+                id_number,
+            </if>
+            <if test="graduationSchool != null">
+                graduation_school,
+            </if>
+            <if test="education != null">
+                education,
+            </if>
+            <if test="identity != null">
+                identity,
+            </if>
+            <if test="height != null">
+                height,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="bloodType != null">
+                blood_type,
+            </if>
+            <if test="major != null">
+                major,
+            </if>
+            <if test="qq != null">
+                qq,
+            </if>
+            <if test="webchat != null">
+                webchat,
+            </if>
+            <if test="marriage != null">
+                marriage,
+            </if>
+            <if test="msn != null">
+                msn,
+            </if>
+            <if test="militaryService != null">
+                military_service,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="wagesNumber != null">
+                #{wagesNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="socialNumber != null">
+                #{socialNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="providentFundNumber != null">
+                #{providentFundNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="nation != null">
+                #{nation,jdbcType=VARCHAR},
+            </if>
+            <if test="country != null">
+                #{country,jdbcType=VARCHAR},
+            </if>
+            <if test="homeAddress != null">
+                #{homeAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="liveAddress != null">
+                #{liveAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="idNumber != null">
+                #{idNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="graduationSchool != null">
+                #{graduationSchool,jdbcType=VARCHAR},
+            </if>
+            <if test="education != null">
+                #{education,jdbcType=VARCHAR},
+            </if>
+            <if test="identity != null">
+                #{identity,jdbcType=VARCHAR},
+            </if>
+            <if test="height != null">
+                #{height,jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null">
+                #{weight,jdbcType=VARCHAR},
+            </if>
+            <if test="bloodType != null">
+                #{bloodType,jdbcType=VARCHAR},
+            </if>
+            <if test="major != null">
+                #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="qq != null">
+                #{qq,jdbcType=VARCHAR},
+            </if>
+            <if test="webchat != null">
+                #{webchat,jdbcType=VARCHAR},
+            </if>
+            <if test="marriage != null">
+                #{marriage,jdbcType=VARCHAR},
+            </if>
+            <if test="msn != null">
+                #{msn,jdbcType=VARCHAR},
+            </if>
+            <if test="militaryService != null">
+                #{militaryService,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertUserPhoto" parameterType="org.felix.model.ro.SysUserPhoto">
+        insert into sys_user_photo
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="photo != null">
+                photo,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=VARCHAR},
+            </if>
+            <if test="photo != null">
+                #{photo,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="selectUserInfoByDeptIds" resultMap="BaseResultMap">
+        select 
+        <include refid="Base_Column_List"/>
+        from sys_user
+        where dept_id in
+        <foreach collection="java.util.List" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+        and deleted=1
+    </select>
+
+    <insert id="batchInsertUserPhotoTemp">
+        insert into user_photo_temp(id, photo)
+            values (#{id}, #{userPhoto})
+    </insert>
+
+    <select id="selectAllUserPhotoTemp" resultType="java.lang.String">
+        select photo from user_photo_temp
+    </select>
+
+    <update id="updateUserPhotoByUserId">
+        update sys_user_photo
+            set photo = #{userPhoto}
+        where user_id = #{userId}
+    </update>
+
+    <update id="updateUserPasswordByEmail">
+        update sys_user
+        set password = #{password}, salt = #{salt} w
+        here email = #{email}
+    </update>
+
+    <!--SQL写法-->
+    <select id="selectDeptUserCount" resultType="org.felix.model.vo.resp.EchartsVO">
+        SELECT
+            t2.name,
+            count(t1.id) AS value
+        FROM
+            sys_user t1
+        LEFT JOIN sys_dept t2 ON t1.dept_id = t2.id
+        GROUP BY
+            t2.id
+    </select>
+
+    <select id="selectUserSexCount" resultType="org.colin.model.vo.resp.EchartsVO">
+        SELECT
+            CASE t1.sex
+            WHEN 1 then '男'
+            WHEN 2 then '女'
+            ELSE '未知'
+            END as name,
+            count(t1.id) AS value
+        FROM
+            sys_user t1
+        GROUP BY
+            t1.sex
+    </select>
+
+    <select id="selectUserRoleCount" resultType="org.colin.model.vo.resp.EchartsVO">
+        SELECT
+            t2.name,
+            count(t1.user_id) as value
+        FROM
+        sys_user_role t1
+        LEFT JOIN sys_role t2 on t1.role_id = t2.id
+        GROUP BY
+            t1.role_id
+    </select>
+
+    <select id="selectSalaryUserCount" resultType="org.colin.model.vo.resp.EchartsVO">
+        select A.ss as name, count(A.ss) as value from (
+            select (
+                CASE
+                WHEN month_salary &lt; 3000 THEN '3000以下'
+                WHEN month_salary BETWEEN 3000 AND 5999 THEN '3000-6000'
+                WHEN month_salary BETWEEN 6000 AND 7999 THEN '6000-8000'
+                WHEN month_salary BETWEEN 8000 AND 9999 THEN '8000-10000'
+                WHEN month_salary BETWEEN 10000 AND 11999 THEN '10000-12000'
+                WHEN month_salary BETWEEN 12000 AND 14999 THEN '12000-15000'
+                WHEN month_salary BETWEEN 15000 AND 17999 THEN '15000-18000'
+                WHEN month_salary BETWEEN 18000 AND 21999 THEN '18000-22000'
+                WHEN month_salary BETWEEN 22000 AND 26999 THEN '22000-27000'
+                ELSE '27000以上'
+                END
+            ) as ss from sys_user
+        )A GROUP BY A.ss ORDER BY value
+    </select>
+
+    <select id="loginBrowser" resultType="org.colin.model.vo.resp.EchartsVO">
+        SELECT
+            IFNULL(t1.login_browser,'其他') as name,
+            count(t1.id) AS value
+        FROM
+            sys_login_log t1
+        GROUP BY
+            t1.login_browser
+    </select>
+
+    <select id="getIpAddressInfo" resultType="org.colin.model.vo.resp.EchartsVO">
+        SELECT
+            IF(t1.login_address = '', '其他', t1.login_address) as name,
+            count(t1.id) AS value
+        FROM
+            sys_login_log t1
+        GROUP BY
+            t1.login_address
+    </select>
+
+
+
+
+
+</mapper>
