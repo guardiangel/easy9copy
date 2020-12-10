@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--content属性值 :
+     width:可视区域的宽度，值可为数字或关键词device-width
+     height:同width
+     intial-scale:页面首次被显示是可视区域的缩放级别，取值1.0则页面按实际尺寸显示，无任何缩放
+     maximum-scale=1.0, minimum-scale=1.0;可视区域的缩放级别，
+     maximum-scale用户可将页面放大的程序，1.0将禁止用户放大到实际尺寸之上。
+     user-scalable:是否可对页面进行缩放，no 禁止缩放-->
+    <meta name="viewport" content="width=device-width initial-scale=1">
+    <title>Easy9copy管理平台</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="icon" type="image/x-icon" href="/images/easy9.ico"/>
+</head>
+<style>
+    .layui-input {
+        width: 300px;
+    }
+
+    .carousel {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 90;
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .login {
+        height: 325px;
+        width: 340px;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+        position: absolute;
+        left: 46%;
+        top: 40%;
+        margin: -150px 0 0 -150px;
+        z-index: 99;
+    }
+
+    a {
+        margin-top: 15px;
+    }
+
+    .layui-layer-setwin {
+        top: 1px;
+    }
+
+    .loginMsgStyle {
+        font-size: 16px;
+        color: #009f95;
+        margin-top: 20px;
+        margin-left: 40px;
+        line-height: 30px;
+    }
+
+    /**
+    标签上显示数字符号
+     */
+    li {
+        list-style-type: decimal;
+    }
+
+    .portalClass {
+        position: absolute;
+        left: 50%;
+        margin: -50px 0 0 -150px;
+        color: #cdcdce;
+        font-size: 15px;
+    }
+
+
+</style>
+<body>
+<div class="layui-carousel carousel" lay-filter="carousel" id="carousel">
+    <div carousel-item="">
+        <div><img src="/images/bg2.jpg" style="..."/></div>
+    </div>
+
+    <div class="layui-container login">
+        <form id="loginForm" action="/user/login" style="..." class="layui-form" method="post"
+              layui-form-pane>
+            <div style="...">
+                <span style="..." id="sysNameId"></span>
+            </div>
+
+            <input name="type" type="hidden" value="1">
+            <input id="time" name="time" type="hidden" value="">
+            <input type="text" name="username" lay-verify="" placeholder="请输入登录账"
+                   autocomplete="off" class="layui-input" value="admin"/>
+            <br>
+            <input type="password" name="password" lay-verify="" placeholder="请输入登录密码"
+                   autocomplete="off" class="layui-input" value="123456">
+            <br>
+            <div>
+                <div style="...">
+                    <input type="text" name="code" lay-verify="" placeholder="请输入验证码"
+                           autocomplete="off" class="layui-input" style="..." maxlength="4">
+                </div>
+                <div style="...">
+                    <img src="" id="code" alt="验证码" onclick="changeCode()">
+                </div>
+            </div>
+            <br>
+            <a style="..." class="layui-btn layui-btn-normal" lay-filter="login-submit"
+               lay-submit="" id="submit">登录</a>
+        </form>
+    </div>
+
+    <div class="portalClass">
+        <span id="companyName"></span>
+    </div>
+</div>
+
+<div id="loginMsgDiv" style="..." class="loginMsgStyle">
+    <span id="objNodeId"></span>
+</div>
+
+<!--JS操作-->
+
+<script src="/layui/layui.all.js"/>
+<script src="/js/core.util.js"/>
+<script>
+    /**
+     * 改变验证码
+     */
+    function changeCode() {
+        let currentTime = new Date().getTime();
+        $("#time").val(currentTime);
+        let codeUrl = "/sys/getPictureVerification?time=" + currentTime;
+        $("#code").attr("src", codeUrl);
+    }
+
+
+</script>
+</body>
+</html>
