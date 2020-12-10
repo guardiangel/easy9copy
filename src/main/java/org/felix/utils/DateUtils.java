@@ -28,7 +28,7 @@ public final class DateUtils {
 
     public static void main(String[] args) {
         // instant使用
-        System.out.println("instant使用————————————");
+       /* System.out.println("instant使用————————————");
         System.out.println(Instant.now().toEpochMilli());
         System.out.println(System.currentTimeMillis());
         Instant instant = Instant.now();
@@ -74,7 +74,7 @@ public final class DateUtils {
         System.out.println("Date -> String使用");
         DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
         String string = df.format(LocalDateTime.ofInstant(Instant.ofEpochMilli(System.currentTimeMillis()), ZoneId.of("Asia/Shanghai")));
-        System.out.println(string);
+        System.out.println(string);*/
 
     }
 }

@@ -25,4 +25,13 @@ public final class Constant {
      */
     public static final String ACCESS_TOKEN = "authorization";
 
+    /**
+     *主动去刷新 token key(适用场景 比如修改了用户的角色/权限去刷新token)
+     */
+    public static final String JWT_REFRESH_KEY = "jwt-refresh-key:";
+
+    /**
+     * 用户权鉴缓存 key
+     */
+    public static final String IDENTIFY_CACHE_KEY = "shiro-cache:org.felix.shiro.CustomRealm.authorizationCache:";
 }

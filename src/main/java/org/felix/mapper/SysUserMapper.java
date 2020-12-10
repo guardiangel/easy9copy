@@ -1,5 +1,6 @@
 package org.felix.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.felix.model.entity.SysUser;
 import org.felix.model.ro.SysUserAttac;
 import org.felix.model.ro.SysUserPhoto;
@@ -16,6 +17,7 @@ import java.util.List;
 /**
  * SysUserMapper
  */
+@Mapper
 public interface SysUserMapper {
 
     void updateUserPoint(@Param(value = "userId") String userId, @Param(value = "point") String point);

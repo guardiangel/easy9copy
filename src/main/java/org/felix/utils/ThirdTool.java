@@ -1,10 +1,8 @@
 package org.felix.utils;
 
-import io.swagger.annotations.ApiModelProperty;
 import org.felix.model.dto.EmailNoticeDto;
 import org.felix.model.ro.EmailRO;
 import org.felix.service.MailService;
-import org.felix.service.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

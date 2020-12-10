@@ -1,7 +1,10 @@
 package org.felix.utils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * @author Felix
@@ -41,5 +44,32 @@ public final class Tool {
     public static void main(String[] args) {
         String t = "test";
         System.err.println(isBlank(t));
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static String getPrimaryKey() {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+        LocalDateTime now = LocalDateTime.now();
+        String nowStr = now.format(format);
+        return nowStr + getRandomString(1, 9, 4);
+    }
+
+    /**
+     * 使用了synchronized防止并发
+     * @param min
+     * @param max
+     * @param length
+     * @return
+     */
+    public synchronized static String getRandomString(int min, int max, int length) {
+        Random rand = new Random();
+        StringBuffer result = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            result.append(String.valueOf(rand.nextInt(max - min + 1) + min));
+        }
+        return result.toString();
     }
 }

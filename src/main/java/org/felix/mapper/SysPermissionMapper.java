@@ -1,5 +1,6 @@
 package org.felix.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.felix.model.entity.SysPermission;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 /**
  * @author Felix
  */
+@Mapper
 public interface SysPermissionMapper {
 
     List<SysPermission> selectInfoByIds(List<String> ids);

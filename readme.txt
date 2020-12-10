@@ -15,4 +15,4 @@
     @ConfigurationProperties
 六、TOKEN认证基于JSON Web Token(JWT)，参见JwtTokenUtil类
     https://www.cnblogs.com/cndarren/p/11518443.html
-
+七、接口类*Mapper无法识别，使用注解@Mapper解决。

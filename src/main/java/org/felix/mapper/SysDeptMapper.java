@@ -1,5 +1,6 @@
 package org.felix.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.felix.model.entity.SysDept;
 
@@ -8,6 +9,7 @@ import java.util.List;
 /**
  * @author Felix
  */
+@Mapper
 public interface SysDeptMapper {
 
     SysDept selectByPrimaryKey(String id);

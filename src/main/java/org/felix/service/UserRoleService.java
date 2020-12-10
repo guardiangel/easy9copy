@@ -17,6 +17,6 @@ public interface UserRoleService {
 
     int removeByRoleId(String roleId);
 
-    List<String> getUserIdsByRoleId(String roleId);
+    List<String> getUserIdsByRoleIds(List<String> roleIds);
 
 }

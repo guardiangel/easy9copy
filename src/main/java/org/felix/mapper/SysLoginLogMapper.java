@@ -1,5 +1,6 @@
 package org.felix.mapper;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.felix.model.entity.ExportLoginLogBean;
 import org.felix.model.entity.SysLoginLog;
 import org.felix.model.ro.LoginLogPageRO;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * @author Felix
  */
+@Mapper
 public interface SysLoginLogMapper {
 
     int insertSelective(SysLoginLog record);
