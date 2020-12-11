@@ -1,17 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!--content属性值 :
-     width:可视区域的宽度，值可为数字或关键词device-width
-     height:同width
-     intial-scale:页面首次被显示是可视区域的缩放级别，取值1.0则页面按实际尺寸显示，无任何缩放
-     maximum-scale=1.0, minimum-scale=1.0;可视区域的缩放级别，
-     maximum-scale用户可将页面放大的程序，1.0将禁止用户放大到实际尺寸之上。
-     user-scalable:是否可对页面进行缩放，no 禁止缩放-->
-    <meta name="viewport" content="width=device-width initial-scale=1">
-    <title>Easy9copy管理平台</title>
-    <link rel="stylesheet" href="/layui/css/layui.css">
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>Easy9copy平台</title>
+    <link rel="stylesheet" href="/layui/css/layui.css"/>
     <link rel="icon" type="image/x-icon" href="/images/easy9.ico"/>
 </head>
 <style>
@@ -58,11 +50,8 @@
         line-height: 30px;
     }
 
-    /**
-    标签上显示数字符号
-     */
     li {
-        list-style-type: decimal;
+        list-style-type: decimal; /*li标签显示数字符号*/
     }
 
     .portalClass {
@@ -119,12 +108,12 @@
 <div id="loginMsgDiv" style="..." class="loginMsgStyle">
     <span id="objNodeId"></span>
 </div>
-
+aaabbbbbbbb
 <!--JS操作-->
-
 <script src="/layui/layui.all.js"/>
 <script src="/js/core.util.js"/>
-<script>
+<script type="text/javascript">
+
     /**
      * 改变验证码
      */
@@ -134,6 +123,66 @@
         let codeUrl = "/sys/getPictureVerification?time=" + currentTime;
         $("#code").attr("src", codeUrl);
     }
+
+    let layer = layui.layer;
+    let $ = jQuery = layui.jquery;
+    let form = layui.form;
+    let carousel = layui.carousel;
+
+    $(function () {
+
+        console.log("this is a test");
+
+      /*  let submitButton = document.getElementById('#submit');
+        submitButton.addEventListener ? submitButton.addEventListener('click', handlerClick, false)
+            : submitButton.attachEvent('onclick', handlerClick);*/
+
+       /* changeCode();
+
+        form.on("submit(login-submit)", function (data) {
+            CoreUtil.sendAjax("/sys/user/login", JSON.stringify(data.field), function (res) {
+                let ipAddress = res.data.ipAddress;
+                let showMsg = "";
+                if ("" != ipAddress) {
+                    showMsg = "欢迎您，来自[' + ipAddress + ']的朋友";
+                } else {
+                    showMsg = '登录成功，欢迎您';
+                }
+                layer.msg(showMsg, {
+                    icon: 6,  //1:对勾;2:叉叉;3:问号;4:一把锁;5:不开心表情;6:开心表情;7:感叹号;
+                    time: 1000,  //如果不配置，默认是3秒关闭
+                    shade: 0
+                }, function () {
+                    CoreUtil.setData("access_token", res.data.accessToken);
+                    CoreUtil.setData("refresh_token", res.data.refreshToken);
+                    window.location.href = "/index/home";
+                });
+
+            });
+            return false;
+        });
+
+        /!**
+         * 改变下时间间隔、动画类型、高度
+         **!/
+        carousel.render({
+            elem: '#carousel'
+            , interval: 2000
+            , anim: 'fade'
+            , full: true        //全屏
+            , width: '100%'
+            , arrow: 'none'
+        });*/
+
+
+    });
+
+    /**
+     * 处理click事件
+     */
+   /* function handlerClick() {
+        $("#submit").click();
+    }*/
 
 
 </script>

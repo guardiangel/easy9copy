@@ -34,4 +34,40 @@ public final class Constant {
      * 用户权鉴缓存 key
      */
     public static final String IDENTIFY_CACHE_KEY = "shiro-cache:org.felix.shiro.CustomRealm.authorizationCache:";
+
+    /**
+     * 当前用户被锁定
+     */
+    public static final String ACCOUNT_LOCK_KEY = "account-lock-key:";
+
+    /**
+     * refresh_token 主动退出后加入黑名单 key
+     */
+    public static final String JWT_REFRESH_TOKEN_BLACKLIST = "jwt-refresh-token-blacklist:";
+
+    /**
+     * 刷新状态(适用场景如：一个功能点要一次性请求多个接口，当第一个请求刷新接口时候 加入一个节点下一个接口请求进来的时候直接放行)
+     */
+    public static final String JWT_REFRESH_STATUS = "jwt-refresh-status:";
+
+    /**
+     * 标记新的access_token
+     */
+    public static final String JWT_REFRESH_IDENTIFICATION = "jwt-refresh-identification:";
+
+    /**
+     * 角色key
+     */
+    public static final String JWT_ROLES_KEY = "jwt-roles-key:";
+
+    /**
+     * 权限key
+     */
+    public static final String JWT_PERMISSIONS_KEY = "jwt-permissions-key";
+
+    /**
+     *登录图片验证码图片存Redis的key前缀
+     */
+    public static final String PICTURE_VERIFICATION = "pictureVerification";
+
 }

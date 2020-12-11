@@ -111,7 +111,7 @@ public final class JwtTokenUtil {
      * @param token
      * @return
      */
-    private static Claims getClaimsFromToken(String token) {
+    public static Claims getClaimsFromToken(String token) {
         return Jwts.parser().setSigningKey(DatatypeConverter.parseBase64Binary(token))
                 .parseClaimsJws(token).getBody();
     }
@@ -134,7 +134,7 @@ public final class JwtTokenUtil {
      * @param token
      * @return
      */
-    private static boolean isTokenExpired(String token) {
+    public static boolean isTokenExpired(String token) {
         Claims claims = getClaimsFromToken(token);
         if (claims != null) {
             Date expiration = claims.getExpiration();
