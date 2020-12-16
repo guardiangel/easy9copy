@@ -874,8 +874,7 @@
 
     <update id="updateUserPasswordByEmail">
         update sys_user
-        set password = #{password}, salt = #{salt} w
-        here email = #{email}
+        set password = #{password}, salt = #{salt} where email = #{email}
     </update>
 
     <!--SQL写法-->

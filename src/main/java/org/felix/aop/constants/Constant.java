@@ -74,4 +74,15 @@ public final class Constant {
      * 用户名称 key
      */
     public static final String JWT_USER_NAME = "jwt-user-name-key";;
+
+    /**
+     * access_token 主动退出后加入黑名单 key
+     */
+    public static final String JWT_ACCESS_TOKEN_BLACKLIST = "jwt-access-token-blacklist:";
+
+    /**
+     * 标记用户是否已经删除
+     */
+    public static final String DELETED_USER_KEY = "deleted-user-key:";
+
 }

@@ -52,7 +52,7 @@ public class BbsUserVO {
     private String photo;
 
     @ApiModelProperty(value = "积分")
-    private String point;
+    private Integer point;
 
     @ApiModelProperty(value = "总发贴数")
     private Integer publishPostCount;
@@ -266,11 +266,11 @@ public class BbsUserVO {
         this.photo = photo;
     }
 
-    public String getPoint() {
+    public Integer getPoint() {
         return point;
     }
 
-    public void setPoint(String point) {
+    public void setPoint(Integer point) {
         this.point = point;
     }
 
