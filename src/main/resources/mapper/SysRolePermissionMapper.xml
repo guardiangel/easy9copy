@@ -40,7 +40,7 @@
         ]]>
     </select>
 
-    <insert id="batchRolePermission" parameterType="org.colin.model.entity.SysRolePermission">
+    <insert id="batchRolePermission" parameterType="org.felix.model.entity.SysRolePermission">
         INSERT INTO sys_role_permission (
         id,
         role_id,

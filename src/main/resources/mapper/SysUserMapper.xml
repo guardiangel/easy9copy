@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.felix.mapper.SysUserMapper">
-
     <resultMap id="BaseResultMap" type="org.felix.model.entity.SysUser">
         <id column="id" jdbcType="VARCHAR" property="id"></id>
         <result column="username" jdbcType="VARCHAR" property="username"></result>
@@ -373,7 +372,7 @@
         where user_id = #{userId}
     </update>
 
-    <select id="selectTabelByName" resultType="org.felix.model.entity.SysUser"
+    <select id="selectAll" resultType="org.felix.model.entity.SysUser"
             parameterType="org.felix.model.vo.req.UserPageReqVO">
         SELECT
             t1.id,
@@ -891,7 +890,7 @@
             t2.id
     </select>
 
-    <select id="selectUserSexCount" resultType="org.colin.model.vo.resp.EchartsVO">
+    <select id="selectUserSexCount" resultType="org.felix.model.vo.resp.EchartsVO">
         SELECT
             CASE t1.sex
             WHEN 1 then '男'
@@ -905,7 +904,7 @@
             t1.sex
     </select>
 
-    <select id="selectUserRoleCount" resultType="org.colin.model.vo.resp.EchartsVO">
+    <select id="selectUserRoleCount" resultType="org.felix.model.vo.resp.EchartsVO">
         SELECT
             t2.name,
             count(t1.user_id) as value
@@ -916,7 +915,7 @@
             t1.role_id
     </select>
 
-    <select id="selectSalaryUserCount" resultType="org.colin.model.vo.resp.EchartsVO">
+    <select id="selectSalaryUserCount" resultType="org.felix.model.vo.resp.EchartsVO">
         select A.ss as name, count(A.ss) as value from (
             select (
                 CASE
@@ -935,7 +934,7 @@
         )A GROUP BY A.ss ORDER BY value
     </select>
 
-    <select id="loginBrowser" resultType="org.colin.model.vo.resp.EchartsVO">
+    <select id="loginBrowser" resultType="org.felix.model.vo.resp.EchartsVO">
         SELECT
             IFNULL(t1.login_browser,'其他') as name,
             count(t1.id) AS value
@@ -945,7 +944,7 @@
             t1.login_browser
     </select>
 
-    <select id="getIpAddressInfo" resultType="org.colin.model.vo.resp.EchartsVO">
+    <select id="getIpAddressInfo" resultType="org.felix.model.vo.resp.EchartsVO">
         SELECT
             IF(t1.login_address = '', '其他', t1.login_address) as name,
             count(t1.id) AS value

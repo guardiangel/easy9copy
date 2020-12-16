@@ -16,22 +16,22 @@ public class LoginRespVO {
     private String refreshToken;
 
     @ApiModelProperty(value = "用户名")
-    private String userName;
+    private String username;
 
-    @ApiModelProperty(value = "用户真实姓名")
+    @ApiModelProperty(value = "真实姓名")
     private String realName;
 
-    @ApiModelProperty(value = "别名")
+    @ApiModelProperty(value = "昵称")
     private String nickName;
 
-    @ApiModelProperty(value = "用户ID")
+    @ApiModelProperty(value = "用户id")
     private String id;
 
     @ApiModelProperty(value = "电话")
     private String phone;
 
-    @ApiModelProperty(value = "登录IP")
-    private String ipAddRess;
+    @ApiModelProperty(value = "登录者IP所在地")
+    private String ipAddress;
 
     @ApiModelProperty(value = "用户所拥有的菜单权限(前后端分离返回给前端控制菜单和按钮的显示和隐藏)")
     private List<PermissionRespNode> list;
@@ -41,14 +41,22 @@ public class LoginRespVO {
         return "LoginRespVO{" +
                 "accessToken='" + accessToken + '\'' +
                 ", refreshToken='" + refreshToken + '\'' +
-                ", userName='" + userName + '\'' +
+                ", username='" + username + '\'' +
                 ", realName='" + realName + '\'' +
                 ", nickName='" + nickName + '\'' +
                 ", id='" + id + '\'' +
                 ", phone='" + phone + '\'' +
-                ", ipAddRess='" + ipAddRess + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
                 ", list=" + list +
                 '}';
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public String getRefreshToken() {
@@ -59,12 +67,12 @@ public class LoginRespVO {
         this.refreshToken = refreshToken;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getRealName() {
@@ -99,12 +107,12 @@ public class LoginRespVO {
         this.phone = phone;
     }
 
-    public String getIpAddRess() {
-        return ipAddRess;
+    public String getIpAddress() {
+        return ipAddress;
     }
 
-    public void setIpAddRess(String ipAddRess) {
-        this.ipAddRess = ipAddRess;
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
     public List<PermissionRespNode> getList() {

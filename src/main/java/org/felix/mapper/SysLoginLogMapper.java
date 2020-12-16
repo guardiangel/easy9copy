@@ -11,7 +11,6 @@ import java.util.List;
 /**
  * @author Felix
  */
-@Mapper
 public interface SysLoginLogMapper {
 
     int insertSelective(SysLoginLog record);

@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * @author Felix
  */
-@Mapper
 public interface SysRoleMapper {
 
     List<SysRole> getRoleInfoByIds(List<String> ids);

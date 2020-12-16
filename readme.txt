@@ -70,5 +70,15 @@ Field producer in org.felix.controller.login.UserConroller required a bean of ty
 
 在config目录下定义一个类KaptchaConfig，添加@Configuration， 生成DefaultKaptcha方法，配置@Bean
 
+十、login.html中，以下代码不执行，无法调用后台逻辑
+let codeUlr = "/sys/getPictureVerification?time=" + currentTime;
+        $("#codeImg").attr('src', codeUlr);
+ 原因：ShiroConfig中的shiroFilterFactoryBean方法，以下代码不可以使用HashMap<>()
+ Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
+
+ 十一、mapper.xml配置文件的读取，参考PrimaryDbConfig类
+
+
+
 
 

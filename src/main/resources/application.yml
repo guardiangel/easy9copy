@@ -93,7 +93,7 @@ spring:
       filters: stat, wall, slf4j
 
 #mybatis:
-#  mapperLocations: classpath:mapper/*Mapper.xml #指定Mapper.xml位置
+# mapperLocations: classpath:mapper/*Mapper.xml #指定Mapper.xml位置
 #  configuration:
 #    map-underscore-to-camel-case: true   #开启驼峰功能
 

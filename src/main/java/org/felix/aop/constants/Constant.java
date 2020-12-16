@@ -70,4 +70,8 @@ public final class Constant {
      */
     public static final String PICTURE_VERIFICATION = "pictureVerification";
 
+    /**
+     * 用户名称 key
+     */
+    public static final String JWT_USER_NAME = "jwt-user-name-key";;
 }

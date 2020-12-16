@@ -17,7 +17,6 @@ import java.util.List;
 /**
  * SysUserMapper
  */
-@Mapper
 public interface SysUserMapper {
 
     void updateUserPoint(@Param(value = "userId") String userId, @Param(value = "point") String point);

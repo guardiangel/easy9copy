@@ -8,7 +8,6 @@ import java.util.List;
 /**
  * @author Felix
  */
-@Mapper
 public interface SysPermissionMapper {
 
     List<SysPermission> selectInfoByIds(List<String> ids);
