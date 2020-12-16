@@ -78,7 +78,8 @@ let codeUlr = "/sys/getPictureVerification?time=" + currentTime;
 
  十一、mapper.xml配置文件的读取，参考PrimaryDbConfig类
 
-
+十二、TokenSettings初始化
+    在application.ymk中配置jwt，应用启动时实例化，并且使用SaticInitializerUtil初始化
 
 
 

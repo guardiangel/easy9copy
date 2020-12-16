@@ -20,6 +20,12 @@ public final class Constant {
      */
     public static final String UNDEFINED = "undefined";
 
+
+    /**
+     * 刷新token
+     */
+    public static final String REFRESH_TOKEN = "refresh_token";
+
     /**
      * 正常的认证token
      */

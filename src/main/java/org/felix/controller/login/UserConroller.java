@@ -102,6 +102,18 @@ public class UserConroller {
         return result;
     }
 
+    @GetMapping("/user/token")
+    @ApiOperation(value = "用户刷新token接口")
+    public DataResult<String> refreshToken(HttpServletRequest request) {
+
+        String refreshToken = request.getHeader(Constant.REFRESH_TOKEN);
+        String accessToken = request.getHeader(Constant.ACCESS_TOKEN);
+        DataResult<String> result = DataResult.success();
+        result.setData(userService.refreshToken(refreshToken, accessToken));
+
+        return result;
+    }
+
 
 
 

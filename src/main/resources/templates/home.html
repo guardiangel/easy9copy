@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width initial-scale=1'>
+    <title>Easy9云平台</title>
+    <!--引入layui默认的css样式-->
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all"/>
+    <link rel="icon" type="image/x-icon" href="/images/easy9.ico"/>
+    <!--引入我们在https://www.iconfont.cn平台生成的图标样式库-->
+    <link rel="stylesheet" href="/layui/css/modules/layui-icon-extend/iconfont.css" media="all"/>
+    <style>
+        .layui-tab-title .layui-this {
+            background-color: #009688;
+            color: #eee;
+        }
+
+        .layui-this2 {
+        }
+
+        .first-tab i.layui-tab-close {
+            display: none !important;
+        }
+
+        .layui-layout-admin .layui-body {
+            top: 49px;
+            bottom: 0px;
+        }
+
+        .user-photo-img {
+            width: 50px;
+            height: 50px;
+            margin-right: 1px;
+            border-radius: 50%;
+        }
+
+        .layui-tab-content {
+            padding: 5px;
+        }
+
+        .bottomDivClass {
+            font-size: 15px;
+            /*color: #00968a;*/
+            text-align: center;
+            bottom: 2px;
+        }
+    </style>
+</head>
+<body class="layui-layout-body">
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo" style="font-size: 22px;">
+            <img src="/images/system_ico.png" style="..."/>
+            <!--数据来自sys_config中的sys_value-->
+            <span id="sysNameId2"></span>
+        </div>
+
+
+    </div>
+</div>
+
+</body>
+</html>

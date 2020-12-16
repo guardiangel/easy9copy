@@ -36,16 +36,13 @@ import java.util.concurrent.TimeUnit;
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
-    private Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Resource
     private TokenSettings tokenSettings;
 
     @Resource
     private IPAddressTool ipAddressTool;
-
-    @Resource
-    private ThirdTool thirdTool;
 
     @Resource
     private SysUserMapper sysUserMapper;
@@ -64,8 +61,7 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private RedisService redisService;
-    @Resource
-    private MailService mailService;
+
 
     @Resource
     private UserRoleService userRoleService;
@@ -167,7 +163,7 @@ public class UserServiceImpl implements UserService {
         claims.put(Constant.JWT_USER_NAME, sysUser.getRealName());
         String accessToken = JwtTokenUtil.getAccessToken(sysUser.getId(), claims);
         String refresh_token;
-        if (vo.getType().equals("1")) {
+        if ("1".equals(vo.getType())) {
             refresh_token = JwtTokenUtil.getRefreshToken(sysUser.getId(), claims);
         } else {
             refresh_token = JwtTokenUtil.getRefreshAppToken(sysUser.getId(), claims);
@@ -232,7 +228,7 @@ public class UserServiceImpl implements UserService {
         claims.put(Constant.JWT_USER_NAME, sysUser.getRealName());
         String access_token = JwtTokenUtil.getAccessToken(sysUser.getId(), claims);
         String refresh_token;
-        if (vo.getType().equals("1")) {
+        if ("1".equals(vo.getType())) {
             refresh_token = JwtTokenUtil.getRefreshToken(sysUser.getId(), claims);
         } else {
             refresh_token = JwtTokenUtil.getRefreshAppToken(sysUser.getId(), claims);
@@ -703,7 +699,7 @@ public class UserServiceImpl implements UserService {
         //注册成功后，向管理员发送告知邮件
         String ip = IPUtils.getIpAddr(request);
         String ip_address = ipAddressTool.getAddressById(ip);
-        String content = "注册邮箱为[" + vo.getEmail() + "]的[" + vo.getUsername() + "]用户注册成功，IP：" + ip + "，地点：[" + ip_address + "]";
+       // String content = "注册邮箱为[" + vo.getEmail() + "]的[" + vo.getUsername() + "]用户注册成功，IP：" + ip + "，地点：[" + ip_address + "]";
         //thirdTool.sendNoticeEmail("有人注册", content);
     }
 
